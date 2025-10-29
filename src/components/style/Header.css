@@ -1,0 +1,26 @@
+/* Estilos adicionales para el Header si se necesitan */
+header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Animación suave para el contador del carrito */
+.cart-badge-enter {
+  animation: bounceIn 0.3s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Estilos hover para mejorar la UX */
+.breadcrumb-link:hover {
+  text-decoration: underline;
+}
