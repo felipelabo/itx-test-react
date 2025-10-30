@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import {useFetch} from "../hooks/useFetch";
 import RadioButton from "../components/RadioButton";
+import { useCart } from "../hooks/useCart";
+import {MdOutlineShoppingBag, MdOutlineLocalShipping, MdOutlineCalendarMonth } from 'react-icons/md';
 
 export default function ProductDetailsPage() {
 
@@ -10,6 +12,8 @@ export default function ProductDetailsPage() {
 
     const [color, setColor] = useState('');
     const [storage, setStorage] = useState('');
+
+    const { addToCart, errorCart, loadingCart  } = useCart();
 
     /* Manejo el cambio de color */
     const handleColorChange = (e) => {
@@ -27,6 +31,12 @@ export default function ProductDetailsPage() {
         e.preventDefault();
         // Lógica para agregar al carrito
         console.log(`color:${color} - storage:${storage}`);
+        addToCart({
+            id: data.id,
+            color: color,
+            storage: storage,
+        });
+
     }
 
     useEffect(() => {
@@ -81,13 +91,41 @@ export default function ProductDetailsPage() {
                                     </div>
                                     <button 
                                         type="submit" 
-                                        className="bg-(--primary-color) text-white px-4 py-2 rounded hover:bg-(--primary-color-dark) disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors w-full mt-8"
+                                        className="h-12 bg-(--primary-color) text-(--primary-color-on) flex justify-center items-center px-4 py-2 rounded hover:bg-(--primary-color-dark) disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors w-full mt-8"
                                         disabled={data.price == '' || color == '' || storage == ''}    
                                     >   
-                                        Add to Cart
+                                        {!loadingCart && <><MdOutlineShoppingBag size={16} className="mr-2"/> Add to Cart</>}
+                                        {loadingCart && <div>
+                                            <span class="loader"></span>
+                                        </div>}
                                     </button>
-                                    <p className="text-xs h-6 mt-1 flex items-center">{(data.price == '') ? 'Items is not available' : (color == '' || storage == '') ? 'Please select all the available options' : ''}</p>
+                                    <p className={`text-xs h-6 mt-1 flex items-center ${errorCart ? 'text-red-500' : 'text-(--text-light)'}`}>
+                                        {
+                                            (data.price == '') 
+                                                ? 'Items is not available' 
+                                                : (color == '' || storage == '') 
+                                                    ? 'Please select all the available options' 
+                                                    : (errorCart ? 'Is not possible to add the product' : '')
+                                        }
+                                    </p>
                                 </form>
+
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="flex items-center border border-solid border-(--secondary-color-light) p-2 rounded mt-4">
+                                        <MdOutlineLocalShipping size={35} className="mr-2 text-(--primary-color)"/>
+                                        <div>
+                                            <p className="text-sm text-(--text-light) font-semibold">Estimated Delivery</p>
+                                            <p className="text-sm text-(--text-light)">3-5 business days</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center border border-solid border-(--secondary-color-light) p-2 rounded mt-4">
+                                        <MdOutlineCalendarMonth size={35} className="mr-2 text-(--primary-color)"/>
+                                        <div>
+                                            <p className="text-sm text-(--text-light) ">Free return within <b>30 days</b> of purchase.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                             </div>
                             
                             {/* Especificaciones técnicas */}

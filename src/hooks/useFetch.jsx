@@ -18,6 +18,7 @@ export function useFetch(url, options = {}, auto = true) {
 		setLoading(true);
 		setError(null);
 		setData(null);
+		await new Promise(resolve => setTimeout(resolve, 2000)); // Simula un retraso de 2 segundos
 		try {
 			const response = await fetch(url, { ...options, ...customOptions });
 			if (!response.ok) {

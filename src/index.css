@@ -25,7 +25,7 @@
   --secondary-color:#839c00;
   --secondary-color-light:#aec82b;
   --secondary-color-dark:#60700c;
-  --secondary-color-on:#ffffff;
+  --secondary-color-on:#213547;
 
   --boxshadow: 0px 0px 0px 0px rgba(0,0,0,0);  /*0px 0px 15px -3px rgba(0,0,0,0.1);*/
   --boxshadow-hover: 0px 6px 30px -3px rgba(0,0,0,0.2);
@@ -67,3 +67,23 @@ button{
     background-color: #f9f9f9;
   }
 }*/
+
+.loader {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #FFF;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+} 

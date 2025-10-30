@@ -1,48 +1,58 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, use, useContext, useState } from 'react';
+import {useFetch} from '../hooks/useFetch';
 
-const CartContext = createContext();
+export const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(0);
+  const {fetchData, loading, error, data} = useFetch('/api/cart', {}, false);
 
-  const addToCart = (product) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === product.id);
-      if (existingItem) {
-        return prevItems.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      return [...prevItems, { ...product, quantity: 1 }];
-    });
-  };
+  const addToCart = async (product) => {
+    try {
 
-  const removeFromCart = (productId) => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.id !== productId)
-    );
-  };
+        console.log('Agregando al carrito:', product);
 
-  const updateQuantity = (productId, quantity) => {
-    if (quantity <= 0) {
-      removeFromCart(productId);
-      return;
+        const response = await fetchData({
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                id: product.id/*, 
+                colorCode:product.color, 
+                storageCode: product.storage*/
+            }),
+        });
+
+        if (response === null) throw new Error('Error al agregar producto al carrito');
+        
+        console.log('Respuesta del servidor:', response);
+
+        /*const response = await useFetch('/api/cart', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            idProduct: product.id,
+            codeColor: product.color,
+            codeStorage: product.storage,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al agregar producto al carrito');
+        }
+
+        const data = await response.json();
+        setCartItems(data.quantity);*/
+
+        setCartItems((prevItems) => prevItems + 1);
+
+    } catch (error) {
+        console.error(error);
+        // Manejo de errores
     }
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
-      )
-    );
-  };
-
-  const getTotalItems = () => {
-    return cartItems.reduce((total, item) => total + item.quantity, 0);
-  };
-
-  const clearCart = () => {
-    setCartItems([]);
   };
 
   return (
@@ -50,21 +60,11 @@ export function CartProvider({ children }) {
       value={{
         cartItems,
         addToCart,
-        removeFromCart,
-        updateQuantity,
-        getTotalItems,
-        clearCart,
+        loadingCart:loading,
+        errorCart:error
       }}
     >
       {children}
     </CartContext.Provider>
   );
-}
-
-export function useCart() {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error('useCart must be used within a CartProvider');
-  }
-  return context;
 }
