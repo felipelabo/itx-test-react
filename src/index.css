@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Helvetica;
   line-height: 1.5;
   font-weight: 400;
 
@@ -10,29 +10,34 @@
   background-color: #242424;*/
 
   color: #213547;
-  background-color: #ffffff;
+  background-color:#ffffff;/*#FEFEFD;/*#FBFCF3; /*#f3f4f6;*/
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --primary-color:#094293;
+  --primary-color-light:#346dbf;
+  --primary-color-dark:#12376b;
+  --primary-color-on:#ffffff;
+
+  --secondary-color:#839c00;
+  --secondary-color-light:#aec82b;
+  --secondary-color-dark:#60700c;
+  --secondary-color-on:#ffffff;
+
+  --boxshadow: 0px 0px 25px -3px rgba(0,0,0,0.1);
+  --boxshadow-hover: 0px 6px 30px -3px rgba(0,0,0,0.2);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
 
-button {
+.btn{
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -42,13 +47,6 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
 /*@media (prefers-color-scheme: light) {
