@@ -10,7 +10,7 @@
   background-color: #242424;*/
 
   color: #213547;
-  background-color:#ffffff;/*#FEFEFD;/*#FBFCF3; /*#f3f4f6;*/
+  background-color:#ebeef0;/*#FEFEFD;/*#FBFCF3; /*#f3f4f6;*/
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,8 +27,10 @@
   --secondary-color-dark:#60700c;
   --secondary-color-on:#ffffff;
 
-  --boxshadow: 0px 0px 25px -3px rgba(0,0,0,0.1);
+  --boxshadow: 0px 0px 0px 0px rgba(0,0,0,0);  /*0px 0px 15px -3px rgba(0,0,0,0.1);*/
   --boxshadow-hover: 0px 6px 30px -3px rgba(0,0,0,0.2);
+
+  --text-light:#435363
 }
 
 
@@ -47,6 +49,10 @@ h1 {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+}
+
+button{
+  cursor:pointer
 }
 
 /*@media (prefers-color-scheme: light) {
