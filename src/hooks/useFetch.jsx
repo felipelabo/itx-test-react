@@ -11,8 +11,8 @@ import { useState, useEffect, useCallback } from 'react';
  * @returns {object} { data, loading, error, fetchData, readCache, writeCache }
 */
 
-const CACHE_PREFIX = 'data';
-const CACHE_TTL = 1000 * 60 * 60; // 1 hora
+const CACHE_PREFIX = import.meta.env.VITE_CACHE_PREFIX || 'data_cache';
+const CACHE_TTL = import.meta.env.VITE_CACHE_TTL ? parseInt(import.meta.env.VITE_CACHE_TTL) : 3600000; // 1 hora por defecto
 
 // Genera clave única para cache basada en URL y método
 function makeCacheKey(url, options = {}) {

@@ -1,4 +1,16 @@
 
+/**
+ * Componente de botón de opción (radio button).
+ * 
+ * Muestra un conjunto de opciones como botones de opción.
+ * @param {object[]} object - Array de opciones {code, name}
+ * @param {string} label - Etiqueta del grupo de opciones
+ * @param {string} name - Nombre del grupo de botones
+ * @param {string} value - Valor seleccionado
+ * @param {function} handle - Función manejadora del cambio de selección
+ * @returns {JSX.Element} Componente RadioButton
+ */
+
 export default function RadioButton({object, label, name, value, handle}) {
 
     return (

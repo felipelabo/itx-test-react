@@ -1,6 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+/**
+ * Componente de barra de breadcrumbs.
+ * 
+ * Utilizado en la cabecera para mostrar la ruta de navegación.
+ * @param {object} location - Objeto de ubicación de React Router
+ * @returns {JSX.Element} Componente BreadcrumBar
+ */
+
 export default function BreadcrumBar({ location }) {
 
     const getBreadcrumbs = () => {

@@ -4,6 +4,13 @@ import BreadcrumBar from './BreadcrumBar';
 import {MdOutlineShoppingCart, MdOutlinePersonOutline, MdFavoriteBorder} from 'react-icons/md';
 import { useCart } from '../hooks/useCart';
 
+/**
+ * Componente de la cabecera de la aplicación.
+ * 
+ * Incluye la barra de navegación principal y la barra de breadcrumbs.
+ * @returns {JSX.Element} Componente Header
+ */
+
 export default function Header() {
   const location = useLocation();
   const {cartItems} = useCart();
@@ -25,11 +32,11 @@ export default function Header() {
             <div className="flex-1 flex justify-end">
                 <button className="flex items-center justify-center space-x-2 hover:opacity-80 transition-opacity p-2 mx-2">
                     <MdFavoriteBorder size={28} className="text-(--primary-color) m-0" />
-                    <span className="text-xs text-(--primary-color) font-semibold">Wishlist</span>
+                    <span className="hidden sm:block text-xs text-(--primary-color) font-semibold">Wishlist</span>
                 </button>
                 <button className="flex items-center justify-center space-x-2 hover:opacity-80 transition-opacity p-2 mx-2">
                     <MdOutlinePersonOutline size={28} className="text-(--primary-color) m-0" />
-                    <span className="text-xs text-(--primary-color) font-semibold">Account</span>
+                    <span className="hidden sm:block text-xs text-(--primary-color) font-semibold">Account</span>
                 </button>
                 {/* Icono del carrito con contador */}
                 
@@ -44,7 +51,7 @@ export default function Header() {
                         )}
                     </div>
                     
-                    <span className="text-xs text-(--primary-color) font-semibold">Cart</span>
+                    <span className="hidden sm:block text-xs text-(--primary-color) font-semibold">Cart</span>
                 </button>
 
                     

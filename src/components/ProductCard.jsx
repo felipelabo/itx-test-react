@@ -1,5 +1,12 @@
 import { Link, useNavigate } from "react-router";
 
+/**
+ * Compeonente que muestra la tarjeta de un producto.
+ * 
+ * Muestra imagen, marca, modelo, precio y botón para ver detalles.
+ * @param {object} product - Objeto con los datos del producto
+ * @returns {JSX.Element} Componente ProductCard
+ */
 
 export default function ProductCard({ product }) {
 

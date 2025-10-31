@@ -1,6 +1,13 @@
 import React from "react";
 import "./style/Skeleton.css";
 
+/**
+ * Componente que muestra una tarjeta esqueleto mientras se cargan los datos del producto.
+ * 
+ * Muestra bloques grises animados en lugar de contenido real.
+ * @returns {JSX.Element} Componente SkeletonCard
+ */
+
 export default function SkeletonCard() {
     return (
         <div className="bg-white p-4 rounded-lg shadow-(--boxshadow)">

@@ -1,12 +1,18 @@
 import { createContext, use, useContext, useState } from 'react';
 import {useFetch} from '../hooks/useFetch';
 
+/**
+ * Contexto para el carrito de compras.
+ * 
+ * Proporciona estado y funciones para manejar el carrito de compras.
+ */
+
 export const CartContext = createContext();
 
-const CACHE_TTL = 1000 * 60 * 60; // 1 hora
+const CACHE_TTL = import.meta.env.VITE_CART_CACHE_TTL ? parseInt(import.meta.env.VITE_CART_CACHE_TTL) : 3600000; // 1 hora por defecto
 
 export function CartProvider({ children }) {
-  const {fetchData, loading, error, data} = useFetch('https://itx-frontend-test.onrender.com/api/cart', {}, false);
+  const {fetchData, loading, error, data} = useFetch(import.meta.env.VITE_API_ADD_URL, {}, false);
 
   // Función para escribir cache en localStorage
   const writeCacheItem = (key, value, ttl) => {

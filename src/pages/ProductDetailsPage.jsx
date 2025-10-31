@@ -6,13 +6,23 @@ import { useCart } from "../hooks/useCart";
 import {MdOutlineShoppingBag, MdOutlineLocalShipping, MdOutlineCalendarMonth } from 'react-icons/md';
 import SkeletonProductDetails from "../components/SkeletonProductDetails";
 
+/**
+ * Componente de la página de detalles del producto.
+ * 
+ * Muestra la información detallada de un producto específico.
+ * @returns {JSX.Element} Componente ProductDetailsPage
+ */
+
 export default function ProductDetailsPage() {
 
     const { id } = useParams();
-    const { data, loading, error } = useFetch('https://itx-frontend-test.onrender.com/api/product/'+id);
+    const { data, loading, error } = useFetch(import.meta.env.VITE_API_LIST_DETAILS_URL +id);
 
     const [color, setColor] = useState('');
     const [storage, setStorage] = useState('');
+    // Estado local para la respuesta del carrito
+    const [cartFlag, setCartFlag] = useState(false);
+
 
     const { addToCart, errorCart, loadingCart, dataCart  } = useCart();
 
@@ -28,15 +38,17 @@ export default function ProductDetailsPage() {
         setStorage(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         // Lógica para agregar al carrito
         console.log(`color:${color} - storage:${storage}`);
-        addToCart({
+        await addToCart({
             id: data.id,
             color: color,
             storage: storage,
         });
+
+        setCartFlag(true)
 
     }
 
@@ -45,6 +57,10 @@ export default function ProductDetailsPage() {
         if (data.options.colors && data.options.colors?.length == 1) setColor(data.options.colors[0].code);
         if (data.options.storages && data.options.storages?.length == 1) setStorage(data.options.storages[0].code);
     }, [data]);
+
+    useEffect(() => {
+      setCartFlag(false);
+    }, [id]);
 
     return (
         <div className="p-6 flex flex-col justify-center items-center">
@@ -103,7 +119,7 @@ export default function ProductDetailsPage() {
                                             <span className="loader"></span>
                                         </div>}
                                     </button>
-                                    <p className={`text-xs h-6 mt-1 flex items-center ${errorCart ? 'text-red-500' : 'text-(--text-light)'}`}>
+                                    <p className={`text-xs h-6 mt-1 flex items-center ${errorCart ? 'text-red-500' : cartFlag ? 'text-(--secondary-color-light)' : 'text-(--text-light)'}`}>
                                         {
                                             (data.price == '') 
                                                 ? 'Items is not available' 
@@ -111,7 +127,11 @@ export default function ProductDetailsPage() {
                                                     ? 'Please select all the available options' 
                                                     : errorCart ? 
                                                         'Is not possible to add the product' 
-                                                        : ''
+                                                        : loadingCart ? 
+                                                            '' 
+                                                            :  cartFlag ?
+                                                                'Product added to the cart successfully' 
+                                                                : ''
                                         }
                                     </p>
                                 </form>

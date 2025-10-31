@@ -1,6 +1,13 @@
 import React from "react";
 import "./style/Skeleton.css";
 
+/**
+ * Componente que muestra los detalles esqueleto de un producto mientras se cargan los datos.
+ * 
+ * Muestra bloques grises animados en lugar de contenido real.
+ * @returns {JSX.Element} Componente SkeletonProductDetails
+ */
+
 export default function SkeletonProductDetails() {
     return (
         <div id="product_details" className="bg-white w-[90%] rounded-lg grid grid-cols-1 md:grid-cols-6 gap-6 p-4">

@@ -1,6 +1,14 @@
 import { useState } from "react";
 import {MdOutlineSearch} from 'react-icons/md';
 
+/**
+ * Componente de barra de búsqueda para filtrar productos.
+ * 
+ * Permite al usuario filtrar la lista de productos por modelo o marca.
+ * @param {object[]} listToChange - Lista de productos a filtrar
+ * @param {function} setListToChange - Función para actualizar la lista filtrada
+ * @returns {JSX.Element} Componente SearchBar
+ */
 
 export default function SearchBar({listToChange, setListToChange}) {
     const [textInput, setTextInput] = useState("");
@@ -16,7 +24,7 @@ export default function SearchBar({listToChange, setListToChange}) {
     }
 
     return (
-        <div className="relative w-[30%]">
+        <div className="relative w-full sm:w-[30%]">
             <input
                 type="text"
                 placeholder="Filter products..."

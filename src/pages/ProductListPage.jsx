@@ -4,9 +4,16 @@ import ProductCardList from '../components/ProductCardList';
 import SkeletonCard from '../components/SkeletonCard';
 import SearchBar from '../components/SearchBar';
 
+/**
+ * Componente de la página de lista de productos.
+ * 
+ * Muestra una lista de productos.
+ * @returns {JSX.Element} Componente ProductListPage
+ */
+
 export default function ProductListPage() {
     const [filteredProducts, setFilteredProducts] = useState([]);
-    const { data, loading, error } = useFetch('https://itx-frontend-test.onrender.com/api/product');
+    const { data, loading, error } = useFetch(import.meta.env.VITE_API_LIST_URL);
 
     useEffect(() => {
         if (data) setFilteredProducts(data);
@@ -20,8 +27,8 @@ export default function ProductListPage() {
     return (
         <main>
             <div className="p-4">
-                <div className='p-4 flex justify-between items-center'>
-                    <div className='title-box'>
+                <div className='p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center'>
+                    <div className='title-box mb-4 sm:mb-0'>
                         <h2 className='text-2xl text-(--primary-color) font-bold'>Smarthphones & Tables</h2>
                         <h4 className='text-xs text-(--secondary-color)'>Electronics & Technology</h4>
                     </div>
