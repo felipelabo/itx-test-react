@@ -14,7 +14,7 @@ export default function ProductDetailsPage() {
     const [color, setColor] = useState('');
     const [storage, setStorage] = useState('');
 
-    const { addToCart, errorCart, loadingCart  } = useCart();
+    const { addToCart, errorCart, loadingCart, dataCart  } = useCart();
 
     /* Manejo el cambio de color */
     const handleColorChange = (e) => {
@@ -100,7 +100,7 @@ export default function ProductDetailsPage() {
                                     >   
                                         {!loadingCart && <><MdOutlineShoppingBag size={16} className="mr-2"/> Add to Cart</>}
                                         {loadingCart && <div>
-                                            <span class="loader"></span>
+                                            <span className="loader"></span>
                                         </div>}
                                     </button>
                                     <p className={`text-xs h-6 mt-1 flex items-center ${errorCart ? 'text-red-500' : 'text-(--text-light)'}`}>
@@ -109,7 +109,9 @@ export default function ProductDetailsPage() {
                                                 ? 'Items is not available' 
                                                 : (color == '' || storage == '') 
                                                     ? 'Please select all the available options' 
-                                                    : (errorCart ? 'Is not possible to add the product' : '')
+                                                    : errorCart ? 
+                                                        'Is not possible to add the product' 
+                                                        : ''
                                         }
                                     </p>
                                 </form>
