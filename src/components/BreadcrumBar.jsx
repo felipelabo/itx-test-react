@@ -16,7 +16,7 @@ export default function BreadcrumBar({ location }) {
         const breadcrumbs = [];
 
         // Siempre agregamos el inicio
-        breadcrumbs.push({ name: 'Home', path: '/' });
+        breadcrumbs.push({ name: 'Smarthphones & Tables', path: '/' });
 
         // Si estamos en la página de detalles del producto
         if (path.startsWith('/product/')) {

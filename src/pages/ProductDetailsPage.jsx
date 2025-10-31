@@ -3,7 +3,18 @@ import { useParams } from "react-router";
 import {useFetch} from "../hooks/useFetch";
 import RadioButton from "../components/RadioButton";
 import { useCart } from "../hooks/useCart";
-import {MdOutlineShoppingBag, MdOutlineLocalShipping, MdOutlineCalendarMonth } from 'react-icons/md';
+import {
+    MdOutlineShoppingBag, 
+    MdOutlineLocalShipping, 
+    MdOutlineCalendarMonth,
+    MdOutlineMemory,
+    MdOutlineBattery3Bar,
+    MdOutlinePhoneAndroid,
+    MdOutlineFitScreen,
+    MdOutlineCamera,
+    MdOutlineDesignServices,
+    MdOutlineScale
+ } from 'react-icons/md';
 import SkeletonProductDetails from "../components/SkeletonProductDetails";
 
 /**
@@ -159,31 +170,42 @@ export default function ProductDetailsPage() {
                                 <h4 className="mb-4 text-(--primary-color) font-semibold text-base">Description</h4>
                                 <p className="mb-4"><b>Reference</b><br/> {data.id}</p>
                                 <ul className="mb-4">
-                                    {data.cpu && <li className="mb-2 flex flex-col" key="cpu"><b>CPU:</b> - {data.cpu}</li>}
-                                    {data.ram && <li className="mb-2 flex flex-col" key="ram"><b>RAM:</b> - {data.ram}</li>}
-                                    {data.os && <li className="mb-2 flex flex-col" key="os"><b>OS:</b> - {data.os}</li>}
-                                    {data.displayResolution && <li className="mb-2 flex flex-col" key="displayResolution"><b>Display Resolution:</b> - {data.displayResolution}</li>}
-                                    {data.battery && <li className="mb-2 flex flex-col" key="battery"><b>Battery:</b> - {data.battery}</li>}
+                                    {data.cpu && <li className="mb-2 flex flex-col" key="cpu">
+                                        <span className="flex items-center"><MdOutlineMemory size={16}/><b className="ml-1">CPU</b></span> - {data.cpu}
+                                        </li>}
+                                    {data.ram && <li className="mb-2 flex flex-col" key="ram">
+                                        <span className="flex items-center"><MdOutlineMemory size={16}/><b className="ml-1">RAM</b></span> - {data.ram}
+                                        </li>}
+                                    {data.os && <li className="mb-2 flex flex-col" key="os">
+                                        <span className="flex items-center"><MdOutlinePhoneAndroid size={16}/><b className="ml-1">OS</b></span> - {data.os}
+                                        </li>}
+                                    {data.displayResolution && <li className="mb-2 flex flex-col" key="displayResolution">
+                                        <span className="flex items-center"><MdOutlineFitScreen size={16}/><b className="ml-1">Display Resolution</b></span> - {data.displayResolution}
+                                        </li>}
+                                    {data.battery && <li className="mb-2 flex flex-col" key="battery">
+                                        <span className="flex items-center"><MdOutlineBattery3Bar size={16}/><b className="ml-1">Battery</b></span> - {data.battery}
+                                        </li>}
                                     {data.primaryCamera && Array.isArray(data.primaryCamera) && (
                                         <li className="mb-2 flex flex-col" key="primaryCamera">
-                                            <b>Primary Camera:</b>
+                                            <span className="flex items-center"><MdOutlineCamera size={16}/><b className="ml-1">Primary Camera</b></span>
                                             <ul>
                                                 {data.primaryCamera.map((i, idx) => <li key={"primaryCamera-"+idx}>- {i}</li>)}
                                             </ul>
                                         </li>
                                     )}
-                                    {data.primaryCamera && !Array.isArray(data.primaryCamera) && <li className="mb-2 flex flex-col" key="primaryCamera"><b>Primary Camera:</b> - {data.primaryCamera}</li>}
+                                    {data.primaryCamera && !Array.isArray(data.primaryCamera) && <li className="mb-2 flex flex-col" key="primaryCamera"><span className="flex items-center"><MdOutlineCamera size={16}/><b className="ml-1">Primary Camera</b></span> - {data.primaryCamera}</li>}
                                     {data.secondaryCmera && Array.isArray(data.secondaryCmera) && (
                                         <li className="mb-2 flex flex-col" key="secondaryCamera">
-                                            <b>Secondary Camera:</b>
+                                            <span className="flex items-center"><MdOutlineCamera size={16}/><b className="ml-1">Secondary Camera</b></span>
                                             <ul>
                                                 {data.secondaryCmera.map((i, idx) => <li key={"secondaryCamera-"+idx}>- {i}</li>)}
                                             </ul>
                                         </li>
                                     )}
-                                    {data.secondaryCmera && !Array.isArray(data.secondaryCmera) && <li className="mb-2 flex flex-col" key="secondaryCamera"><b>Secondary Camera:</b> - {data.secondaryCmera}</li>}
-                                    {data.dimentions && data.dimentions !== '-' && <li className="mb-2 flex flex-col" key="dimentions"><b>Dimentions:</b> - {data.dimentions}</li>}
-                                    {data.weight && <li className="mb-2 flex flex-col" key="weight"><b>Weight:</b> - {data.weight} g</li>}
+                                    
+                                    {data.secondaryCmera && !Array.isArray(data.secondaryCmera) && <li className="mb-2 flex flex-col" key="secondaryCamera"><span className="flex items-center"><MdOutlineCamera size={16}/><b className="ml-1">Secondary Camera</b></span> - {data.secondaryCmera}</li>}
+                                    {data.dimentions && data.dimentions !== '-' && <li className="mb-2 flex flex-col" key="dimentions"><span className="flex items-center"><MdOutlineDesignServices size={16}/><b className="ml-1">Dimentions</b></span> - {data.dimentions}</li>}
+                                    {data.weight && <li className="mb-2 flex flex-col" key="weight"><span className="flex items-center"><MdOutlineScale size={16}/><b className="ml-1">Weight</b></span> - {data.weight} g</li>}
                                 </ul>
                             </div>
                             
