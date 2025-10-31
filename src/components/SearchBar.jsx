@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {MdOutlineSearch} from 'react-icons/md';
 
 
 export default function SearchBar({listToChange, setListToChange}) {
@@ -25,10 +26,7 @@ export default function SearchBar({listToChange, setListToChange}) {
 
             />
             <span className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2"/>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
+                <MdOutlineSearch size={20} className="text-(--primary-color)" />
             </span>
         </div>
     );

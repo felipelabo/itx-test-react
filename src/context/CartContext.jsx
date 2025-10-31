@@ -10,7 +10,7 @@ export function CartProvider({ children }) {
   const addToCart = async (product) => {
     try {
 
-        console.log('Agregando al carrito:', product);
+        /*console.log('Agregando al carrito:', product);
 
         const response = await fetchData({
             method: 'POST',
@@ -20,32 +20,13 @@ export function CartProvider({ children }) {
             body: JSON.stringify({ 
                 id: product.id/*, 
                 colorCode:product.color, 
-                storageCode: product.storage*/
+                storageCode: product.storage/
             }),
         });
 
         if (response === null) throw new Error('Error al agregar producto al carrito');
         
-        console.log('Respuesta del servidor:', response);
-
-        /*const response = await useFetch('/api/cart', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-            idProduct: product.id,
-            codeColor: product.color,
-            codeStorage: product.storage,
-            }),
-        });
-
-        if (!response.ok) {
-            throw new Error('Error al agregar producto al carrito');
-        }
-
-        const data = await response.json();
-        setCartItems(data.quantity);*/
+        console.log('Respuesta del servidor:', response);*/
 
         setCartItems((prevItems) => prevItems + 1);
 

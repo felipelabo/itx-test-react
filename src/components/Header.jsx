@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router';
 import '../components/style/Header.css';
 import BreadcrumBar from './BreadcrumBar';
-import {MdOutlineShoppingCart} from 'react-icons/md';
+import {MdOutlineShoppingCart, MdOutlinePersonOutline, MdFavoriteBorder} from 'react-icons/md';
 import { useCart } from '../hooks/useCart';
 
 export default function Header() {
@@ -23,18 +23,31 @@ export default function Header() {
               <span className="text-3xl font-bold">AMS Solutions</span>
             </Link>
             <div className="flex-1 flex justify-end">
-              {/* Icono del carrito con contador */}
-              <div className="relative">
-                <button className="flex items-center space-x-2 hover:opacity-80 transition-opacity p-2">
-                    <MdOutlineShoppingCart size={28} className="text-(--primary-color)" />
+                <button className="flex items-center justify-center space-x-2 hover:opacity-80 transition-opacity p-2 mx-2">
+                    <MdFavoriteBorder size={28} className="text-(--primary-color) m-0" />
+                    <span className="text-xs text-(--primary-color) font-semibold">Wishlist</span>
                 </button>
-                {/* Contador de items */}
-                {cartItems > 0 && (
-                <div className="absolute -top-1 -right-1 bg-(--secondary-color-light) text-(--secondary-color-on) text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                    {cartItems > 99 ? '99+' : cartItems}
-                </div>
-                )}
-              </div>
+                <button className="flex items-center justify-center space-x-2 hover:opacity-80 transition-opacity p-2 mx-2">
+                    <MdOutlinePersonOutline size={28} className="text-(--primary-color) m-0" />
+                    <span className="text-xs text-(--primary-color) font-semibold">Account</span>
+                </button>
+                {/* Icono del carrito con contador */}
+                
+                <button className="flex items-center justify-center space-x-2 hover:opacity-80 transition-opacity p-2 mx-2">
+                    <div className="relative m-0">
+                        <MdOutlineShoppingCart size={28} className="text-(--primary-color) m-0" />
+                        {/* Contador de items */}
+                        {cartItems > 0 && (
+                            <div className="absolute -top-2.5 -right-2.5 bg-(--secondary-color-light) text-(--secondary-color-on) text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                                {cartItems > 99 ? '99+' : cartItems}
+                            </div>
+                        )}
+                    </div>
+                    
+                    <span className="text-xs text-(--primary-color) font-semibold">Cart</span>
+                </button>
+
+                    
             </div>
           </div>
         </div>

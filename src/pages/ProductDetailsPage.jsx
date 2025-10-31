@@ -4,6 +4,7 @@ import {useFetch} from "../hooks/useFetch";
 import RadioButton from "../components/RadioButton";
 import { useCart } from "../hooks/useCart";
 import {MdOutlineShoppingBag, MdOutlineLocalShipping, MdOutlineCalendarMonth } from 'react-icons/md';
+import SkeletonProductDetails from "../components/SkeletonProductDetails";
 
 export default function ProductDetailsPage() {
 
@@ -46,12 +47,15 @@ export default function ProductDetailsPage() {
     }, [data]);
 
     return (
-        <>
-            {loading && <p className="p-6">Cargando detalles del producto...</p>}
-            {error && <p className="p-6" style={{color: 'red'}}>Error: {error.message}</p>}
-            {data && <div className="p-6 flex justify-center items-center">
-                
-                <div className="bg-white w-[90%] rounded-lg grid grid-cols-1 md:grid-cols-6 gap-6 p-4">
+        <div className="p-6 flex flex-col justify-center items-center">
+            {error && 
+                <div id="product_details" className="bg-white w-[90%] rounded-lg p-4">
+                    <p className="text-base text-(--primary-color) text-center">Product details are not available.</p>
+                </div>
+            }
+            {loading && <SkeletonProductDetails />}
+            {data && 
+                <div id="product_details" className="bg-white w-[90%] rounded-lg grid grid-cols-1 md:grid-cols-6 gap-6 p-4">
                     <div className="w-full relative flex justify-center items-start h-full col-span-3 rounded-lg p-4">
                         <img src={data.imgUrl} alt={data.model} className="h-[30vh] sm:h-[50vh] sticky top-[150px] object-cover rounded" />
                     </div>
@@ -167,8 +171,8 @@ export default function ProductDetailsPage() {
                         
                     </div>
                 </div>
-            </div>}
-        </>
+            }
+        </div>
         
     );
 }
